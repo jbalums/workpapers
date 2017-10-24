@@ -5,7 +5,7 @@
 
 <h5>Steps on how to install</h5>
  
-<ul>
+<ul style="list-style-type: none;">
 	<li>Step 1. Install Laravel on your machine it may require <b> PHP7 above </b> See more Server Requirement in <a href="https://laravel.com/docs/5.5">Laravel Documentation</a></li>
 	<li>Step 2. Open the terminal ang go to your project folder and run <b>composer update</b>. It make take minute.</li>
 	<li>Step 3. In the project folder Copy the <b>.env.example</b> and create a new file <b>.env</b></li>
