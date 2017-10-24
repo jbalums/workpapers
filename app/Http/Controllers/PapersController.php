@@ -16,7 +16,8 @@ class PapersController extends Controller
      */
     public function index()
     {
-        //
+        $papers = Papers::all();
+        return response()->json([$papers]);
     }
 
     /**
@@ -116,10 +117,14 @@ class PapersController extends Controller
      */
     public function destroy($id)
     {
-        if (Papers::find($id)->delete()) {
-            return response()->json(['success'=>true, 'msg' => 'Working Paper Succesfully Deleted'], 200);
+        $paper = Papers::find($id);
+        if(isset($paper)){
+            if ($paper->delete()) {
+                return response()->json(['success'=>true, 'msg' => 'Working Paper Succesfully Deleted'], 200);
+            }            
+        }else{
+            return response()->json(['success'=>false, 'msg' => 'Working Paper not found'], 400);
         }
-        return response()->json(['success'=>false, 'msg' => 'Working Paper not found'], 400);
     }
 
 }
