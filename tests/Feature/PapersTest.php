@@ -57,7 +57,7 @@ class PapersTest extends TestCase
     public function it_can_delete_paper()
     {
         $paper = factory('App\Papers')->create();
-        $response = $this->delete('/api/papers/'.$paper->id);
+        $response = $this->delete('/api/papers/'.$paper->reference_code);
         $response->assertStatus(200);
         $response->assertSee('Working Paper Succesfully Deleted');
     }
@@ -65,7 +65,7 @@ class PapersTest extends TestCase
     /** @test */
     public function it_can_check_delete_to_not_found_paper()
     {
-        $response = $this->delete('/api/papers/100');
+        $response = $this->delete('/api/papers/ZZZ1000');
         $response->assertStatus(400);
         $response->assertSee('Working Paper not found');
     }

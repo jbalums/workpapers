@@ -39,7 +39,7 @@ class PapersController extends Controller
     public function store(Request $request)
     {
         $validator = \Validator::make($request->all(), [ 
-            'reference_code' => 'required',
+            'reference_code' => 'required|unique:papers',
             'title' => 'required', 
             'context' => 'required', 
             'folder_id' => 'required|exists:folders,id'
@@ -89,7 +89,7 @@ class PapersController extends Controller
     {
         $validator = \Validator::make($request->all(), [
             'title' => 'required', 
-            'reference_code' => 'required',
+            'reference_code' => 'required|unique:papers',
             'context' => 'required', 
             'folder_id' => 'required|exists:folders,id'
         ]);
@@ -112,12 +112,12 @@ class PapersController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  string reference_code
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($reference_code)
     {
-        $paper = Papers::find($id);
+        $paper = Papers::where('reference_code', $reference_code)->first();
         if(isset($paper)){
             if ($paper->delete()) {
                 return response()->json(['success'=>true, 'msg' => 'Working Paper Succesfully Deleted'], 200);
